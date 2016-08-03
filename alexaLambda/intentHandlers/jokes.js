@@ -5,7 +5,7 @@ function jokes() {}
 
 jokes.prototype.intentHandlers = {
     // register custom intent handlers
-    "solveTyreKickers": function (intent, session, response) {
+    "jokes_solveTyreKickers": function (intent, session, response) {
         //get text back and say same greeting
         //get summary data
         this.storeSessionInfo(session, 'solveTyreKickers');

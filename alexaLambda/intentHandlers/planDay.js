@@ -5,7 +5,7 @@ function planDay() {}
 
 planDay.prototype.intentHandlers = {
     // register custom intent handlers
-    "getSummary": function (intent, session, response) {
+    "planDay_getSummary": function (intent, session, response) {
         //get text back and say same greeting
         //get summary data
         this.storeSessionInfo(session, 'getSummary');
@@ -14,39 +14,31 @@ planDay.prototype.intentHandlers = {
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
     },
-    "getPendingLeads": function (intent, session, response) {
-        //get text back and say same greeting
+    "planDay_getPendingLeads": function (intent, session, response) {
         //get leads data
         this.storeSessionInfo(session, 'getPendingLeads');
-        var speechOutput = "Plumber in bondi or blocked drain in summer hill";
+        var speechOutput = "Plumber in Bondi or blocked drain in Summer Hill";
         var cardTitle = "Your pending leads";
         var cardContent = speechOutput;
         response.tellWithCard(speechOutput, cardTitle, cardContent);
     },
-    "pendingLeadsHelp": function (intent, session, response) {
+    "planDay_pendingLeadsHelp": function (intent, session, response) {
         this.storeSessionInfo(session, 'pendingLeadsHelp');
         var speechOutput = "I'll let you know which leads you're more likely to win. I'll always give you the most recent leads which have not had 3 quotes yet.";
         var cardTitle = "Your pending leads";
         var cardContent = speechOutput;
         response.tellWithCard(speechOutput, cardTitle, cardContent);
     },
-    "leadsHelp": function (intent, session, response) {
-        this.storeSessionInfo(session, 'leadsHelp');
-        var speechOutput = "Leads are the opportunities you want";
-        var cardTitle = "What are leads?";
-        var cardContent = speechOutput;
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
-    },
-    "sendPaymentReminders": function (intent, session, response) {
-        //get text back and say same greeting
+    "planDay_sendPaymentReminders": function (intent, session, response) {
         //get who to send reminders
         this.storeSessionInfo(session, 'sendPaymentReminders');
-        var speechOutput = "Alright, I will send Diana and Adz a reminder";
+        var speechOutput = "A friendly reminder has been sent to Mary in Waterloo and Adam in Surry Hills for the payments pending.";
         var cardTitle = "Sending payment reminders...";
         var cardContent = speechOutput;
         response.tellWithCard(speechOutput, cardTitle, cardContent);
     },
-    "whichReminder": function (intent, session, response) {
+    "planDay_whichReminder": function (intent, session, response) {
+        // checks whether this was part of the summary conversation
         if (session.attributes.intents.indexOf('getSummary') != -1) {
             this.intentHandlers.sendPaymentReminders.call(this, intent, session, response);
         } else {

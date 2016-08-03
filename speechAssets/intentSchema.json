@@ -1,25 +1,25 @@
 {
     "intents": [
         {
-            "intent": "getSummary"
+            "intent": "planDay_getSummary"
         },
         {
-            "intent": "getPendingLeads"
+            "intent": "planDay_readMessages"
         },
         {
-            "intent": "sendPaymentReminders"
+            "intent": "planDay_getPendingLeads"
         },
         {
-            "intent": "leadsHelp"
+            "intent": "planDay_pendingLeadsHelp"
         },
         {
-            "intent": "pendingLeadsHelp"
+            "intent": "planDay_sendPaymentReminders"
         },
         {
-            "intent": "whichReminder"
+            "intent": "planDay_whichReminder"
         },
         {
-            "intent": "solveTyreKickers"
+            "intent": "jokes_solveTyreKickers"
         },
         {
             "intent": "AMAZON.HelpIntent"

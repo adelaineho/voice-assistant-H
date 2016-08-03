@@ -1,36 +1,42 @@
-getSummary morning H
-getSummary hi H
-getSummary hello H
-getSummary morning
-getSummary hi
-getSummary hello
-getSummary good morning
-getSummary good morning H
+planDay_getSummary morning H
+planDay_getSummary hi H
+planDay_getSummary hello H
+planDay_getSummary morning
+planDay_getSummary hi
+planDay_getSummary hello
+planDay_getSummary good morning
+planDay_getSummary good morning H
+planDay_getSummary today's updates
+planDay_getSummary hi pages updates
+planDay_getSummary today's summary
+planDay_getSummary hi pages summary
 
-getPendingLeads pending leads
-getPendingLeads what are the leads
-getPendingLeads tell me about the leads
-getPendingLeads what leads
+planDay_readMessages read me my messages
+planDay_readMessages read messages
+planDay_readMessages what are my messages
+planDay_readMessages what are my messages
 
-pendingLeadsHelp what do you mean by sending leads
-pendingLeadsHelp what do you mean by pending leads
+planDay_getPendingLeads pending leads
+planDay_getPendingLeads what are the leads
+planDay_getPendingLeads tell me about the leads
+planDay_getPendingLeads what leads
 
-leadsHelp what are leads
-leadsHelp what is a lead
+planDay_pendingLeadsHelp what do you mean by sending leads
+planDay_pendingLeadsHelp what do you mean by pending leads
 
-sendPaymentReminders send payment reminders
-sendPaymentReminders payment reminders
-sendPaymentReminders payment reminder
-sendPaymentReminders payment reminder only
-sendPaymentReminders payment reminders only
+planDay_sendPaymentReminders send payment reminders
+planDay_sendPaymentReminders payment reminders
+planDay_sendPaymentReminders payment reminder
+planDay_sendPaymentReminders payment reminder only
+planDay_sendPaymentReminders payment reminders only
 
-whichReminder reminder
-whichReminder reminders
-whichReminder send reminders
-whichReminder reminders only
-whichReminder reminder only
+planDay_whichReminder reminder
+planDay_whichReminder reminders
+planDay_whichReminder send reminders
+planDay_whichReminder reminders only
+planDay_whichReminder reminder only
 
-solveTyreKickers will you ever fix tyre kickers
-solveTyreKickers will you ever solve tyre kickers
-solveTyreKickers tyre kicker
-solveTyreKickers tyre kickers
+jokes_solveTyreKickers will you ever fix tyre kickers
+jokes_solveTyreKickers will you ever solve tyre kickers
+jokes_solveTyreKickers tyre kicker
+jokes_solveTyreKickers tyre kickers
