@@ -16,6 +16,9 @@ planDay_readMessages read messages
 planDay_readMessages what are my messages
 planDay_readMessages what are my messages
 
+planDay_sendMessages send message
+planDay_sendMessages send a message to
+
 planDay_getPendingLeads pending leads
 planDay_getPendingLeads what are the leads
 planDay_getPendingLeads tell me about the leads
