@@ -53,3 +53,39 @@ jokes_solveTyreKickers will you ever fix tyre kickers
 jokes_solveTyreKickers will you ever solve tyre kickers
 jokes_solveTyreKickers tyre kicker
 jokes_solveTyreKickers tyre kickers
+
+accountBalance_leadCredit how much lead credit
+accountBalance_leadCredit what is my lead credit
+accountBalance_leadCredit remaining lead credit
+accountBalance_leadCredit lead credit left
+accountBalance_leadCredit lead credit
+accountBalance_leadCredit lead credit used
+accountBalance_leadCredit lead credit usage
+accountBalance_leadCredit value cap left
+accountBalance_leadCredit left in value cap
+accountBalance_leadCredit value cap credit
+accountBalance_leadCredit value cap used
+accountBalance_leadCredit value cap remaining
+accountBalance_leadCredit value cap usage
+accountBalance_leadCredit usage
+
+accountBalance_daysCredit How many days have I got left in this month
+accountBalance_daysCredit Do I have credit for the rest of this month
+accountBalance_daysCredit Do I have credit left for the rest of this month
+accountBalance_daysCredit how many days till my credit resets
+accountBalance_daysCredit how many days to reset my credit
+
+
+
+hipages {to fix a tap|Description}
+hipages {to clean the carpet|Description}
+hipages I need a tradie that {to clean the carpet|Description}
+hipages find me a tradie that {to clean the carpet|Description}
+hipages I need a somone that {to clean the carpet|Description}
+hipages find me a somone that {to clean the carpet|Description}
+hipages I need a tradie to {to clean the carpet|Description}
+hipages find me a tradie to {to clean the carpet|Description}
+hipages I need a somone to {to clean the carpet|Description}
+hipages find me a somone to {to clean the carpet|Description}
+hipages I have {to clean the carpet|Description}
+hipages I need to {to clean the carpet|Description}

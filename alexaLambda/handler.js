@@ -105,6 +105,21 @@ hipages.prototype.intentHandlers = Object.assign({
         var cardTitle = "How I can help?";
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
+    },
+    "AMAZON.NoIntent": function (intent, session, response) {
+        switch (session.attributes.intents.slice(-1)[0]) {
+            case 'accountBalance_daysCredit' :
+                var speechOutput = "Ok";
+                response.tell(speechOutput);
+                break;
+            default :
+                var speechOutput = "How I can help.";
+                var cardTitle = "Hello";
+                var cardContent = speechOutput;
+                response.askWithCard(speechOutput, cardTitle, cardContent);
+                break;
+        }
+        this.storeSessionInfo(session, 'AMAZON.NoIntent');
     }
 }, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
 
