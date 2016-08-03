@@ -40,6 +40,12 @@
           "intent": "accountBalance_daysCredit"
         },
         {
+          "intent": "howToBeAwesome_moreLeads"
+        },
+        {
+          "intent": "howToBeAwesome_priceBenchmark"
+        },
+        {
             "intent": "AMAZON.HelpIntent"
         },
         {

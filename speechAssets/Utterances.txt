@@ -69,13 +69,27 @@ accountBalance_leadCredit value cap remaining
 accountBalance_leadCredit value cap usage
 accountBalance_leadCredit usage
 
-accountBalance_daysCredit How many days have I got left in this month
-accountBalance_daysCredit Do I have credit for the rest of this month
-accountBalance_daysCredit Do I have credit left for the rest of this month
+accountBalance_daysCredit how many days have I got left in this month
+accountBalance_daysCredit do i have credit for the rest of this month
+accountBalance_daysCredit do i have credit left for the rest of this month
 accountBalance_daysCredit how many days till my credit resets
 accountBalance_daysCredit how many days to reset my credit
 
+howToBeAwesome_moreLeads how can i convert more leads
+howToBeAwesome_moreLeads how can i convert more jobs
+howToBeAwesome_moreLeads how can i win more leads
+howToBeAwesome_moreLeads how can i win more jobs
+howToBeAwesome_moreLeads how can i increase my leads
+howToBeAwesome_moreLeads how can i increase my jobs
+howToBeAwesome_moreLeads convert more leads
+howToBeAwesome_moreLeads convert more jobs
 
+
+howToBeAwesome_priceBenchmark what is my benchmark
+howToBeAwesome_priceBenchmark how do i compare with other tradies
+howToBeAwesome_priceBenchmark how do i compare in terms of rating
+howToBeAwesome_priceBenchmark am i better that my peers
+howToBeAwesome_priceBenchmark am i better that other tradies
 
 hipages {to fix a tap|Description}
 hipages {to clean the carpet|Description}
