@@ -28,11 +28,12 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  * The AlexaSkill prototype and helper functions
  */
 var AlexaSkill = require('./vendor/AlexaSkill');
-var planDay = require('./intentHandlers/planDay');
-var accountBalance = require('./intentHandlers/accountBalance');
-var jobComplete = require('./intentHandlers/jobComplete');
-var howToBeAwesome = require('./intentHandlers/howToBeAwesome');
-var jokes = require('./intentHandlers/jokes');
+var planDay = require('./conversations/planDay');
+var accountBalance = require('./conversations/accountBalance');
+var jobComplete = require('./conversations/jobComplete');
+var howToBeAwesome = require('./conversations/howToBeAwesome');
+var jokes = require('./conversations/jokes');
+var message = require('./intentHandlers/message');
 
 /**
  * hipages is a child of AlexaSkill.
@@ -75,14 +76,37 @@ hipages.prototype.storeSessionInfo = function (session, intent) {
 };
 
 hipages.prototype.intentHandlers = Object.assign({
+    "AMAZON.YesIntent": function (intent, session, response) {
+        switch (session.attributes.intents.slice(-1)[0]) {
+            case 'planDay_getSummary':
+                var speechOutput = "Would you like me to give you your leads, read your messages or send reminders for the outstanding payments?";
+                var cardTitle = "Please be more specific";
+                var cardContent = speechOutput;
+                response.askWithCard(speechOutput, cardTitle, cardContent);
+                break;
+            case 'jobComplete_markComplete':
+                this.storeSessionInfo(session, 'jobComplete_markComplete');
+                var speechOutput = "Payment request sent. I have also requested feedback from Mary.";
+                var cardTitle = "Payment request sent";
+                var cardContent = speechOutput;
+                response.askWithCard(speechOutput, cardTitle, cardContent);
+                break;
+            default:
+                var speechOutput = "How I can help?";
+                var cardTitle = "Hello!";
+                var cardContent = speechOutput;
+                response.askWithCard(speechOutput, cardTitle, cardContent);
+        }
+        this.storeSessionInfo(session, 'AMAZON.YesIntent');
+    },
     "AMAZON.HelpIntent": function (intent, session, response) {
         this.storeSessionInfo(session, 'AMAZON.HelpIntent');
-        var speechOutput = "I can give you a summary, any information regarding your leads and advice on getting more leads or how to better convert your leads.";
-        var cardTitle = "How I can help";
+        var speechOutput = "I can give you a full update, any information regarding your leads and advice on getting more leads or how to better convert your leads.";
+        var cardTitle = "How I can help?";
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
     }
-}, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers);
+}, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
 
 // Create the handler that responds to the Alexa Request.
 var hipagesSkills = function index (event, context) {

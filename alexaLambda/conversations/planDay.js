@@ -20,15 +20,7 @@ planDay.prototype.intentHandlers = {
         var speechOutput = "Message from Sam about the Floor Sanding job in Newtown. <break time='1s' />Hi John. Still waiting on your quote for my floors. Thanks";
         var cardTitle = "Message from Sam";
         var cardContent = "About the Floor Sanding job in Newtown. Hi Dino. Still waiting on your quote for my floors. Thanks";
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
-    },
-    "planDay_sendMessages": function (intent, session, response) {
-        //get recipient messages data
-        this.storeSessionInfo(session, 'planDay_sendMessages');
-        var speechOutput = "Message sent";
-        var cardTitle = "Message sent to Sam";
-        var cardContent = '"My apologies Sam. The cost for the job is $1,200 including GST. I will send you a written quote tonight."';
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
+        response.askWithCard(speechOutput, cardTitle, cardContent);
     },
     "planDay_getPendingLeads": function (intent, session, response) {
         //get leads data
@@ -36,7 +28,7 @@ planDay.prototype.intentHandlers = {
         var speechOutput = "Plumber in Bondi or blocked drain in Summer Hill";
         var cardTitle = "Your pending leads";
         var cardContent = speechOutput;
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
+        response.askWithCard(speechOutput, cardTitle, cardContent);
     },
     "planDay_pendingLeadsHelp": function (intent, session, response) {
         this.storeSessionInfo(session, 'planDay_pendingLeadsHelp');
@@ -49,9 +41,9 @@ planDay.prototype.intentHandlers = {
         //get who to send reminders
         this.storeSessionInfo(session, 'planDay_sendPaymentReminders');
         var speechOutput = "A friendly reminder has been sent to Mary in Waterloo and Adam in Surry Hills for the payments pending.";
-        var cardTitle = "Sending payment reminders...";
+        var cardTitle = "Payment reminders sent";
         var cardContent = speechOutput;
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
+        response.askWithCard(speechOutput, cardTitle, cardContent);
     },
     "planDay_whichReminder": function (intent, session, response) {
         // checks whether this was part of the summary conversation

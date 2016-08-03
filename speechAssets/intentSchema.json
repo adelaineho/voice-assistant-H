@@ -7,9 +7,6 @@
             "intent": "planDay_readMessages"
         },
         {
-            "intent": "planDay_sendMessages"
-        },
-        {
             "intent": "planDay_getPendingLeads"
         },
         {
@@ -22,7 +19,19 @@
             "intent": "planDay_whichReminder"
         },
         {
+            "intent": "jobComplete_markComplete"
+        },
+        {
+            "intent": "jobComplete_sendPaymentRequest"
+        },
+        {
+            "intent": "message_sendMessage"
+        },
+        {
             "intent": "jokes_solveTyreKickers"
+        },
+        {
+            "intent": "AMAZON.YesIntent"
         },
         {
             "intent": "AMAZON.HelpIntent"

@@ -14,10 +14,7 @@ planDay_getSummary hi pages summary
 planDay_readMessages read me my messages
 planDay_readMessages read messages
 planDay_readMessages what are my messages
-planDay_readMessages what are my messages
-
-planDay_sendMessages send message
-planDay_sendMessages send a message to
+planDay_readMessages tell me my messages
 
 planDay_getPendingLeads pending leads
 planDay_getPendingLeads what are the leads
@@ -25,7 +22,7 @@ planDay_getPendingLeads tell me about the leads
 planDay_getPendingLeads what leads
 
 planDay_pendingLeadsHelp what do you mean by sending leads
-planDay_pendingLeadsHelp what do you mean by pending leads
+planDay_pendingLeadsHelp what are pending leads
 
 planDay_sendPaymentReminders send payment reminders
 planDay_sendPaymentReminders payment reminders
@@ -38,6 +35,19 @@ planDay_whichReminder reminders
 planDay_whichReminder send reminders
 planDay_whichReminder reminders only
 planDay_whichReminder reminder only
+
+jobComplete_markComplete mark job as completed
+jobComplete_markComplete completed a job
+
+jobComplete_sendPaymentRequest request payment
+jobComplete_sendPaymentRequest request payment for
+jobComplete_sendPaymentRequest send payment request
+
+message_sendMessage send message to
+message_sendMessage send a message to
+message_sendMessage reply message to
+message_sendMessage reply to
+message_sendMessage message
 
 jokes_solveTyreKickers will you ever fix tyre kickers
 jokes_solveTyreKickers will you ever solve tyre kickers
