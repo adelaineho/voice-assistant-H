@@ -1,0 +1,31 @@
+getSummary morning H
+getSummary hi H
+getSummary hello H
+getSummary morning
+getSummary hi
+getSummary hello
+getSummary good morning
+getSummary good morning H
+
+getPendingLeads pending leads
+getPendingLeads what are the leads
+getPendingLeads tell me about the leads
+getPendingLeads what leads
+
+pendingLeadsHelp what do you mean by sending leads
+pendingLeadsHelp what do you mean by pending leads
+
+leadsHelp what are leads
+leadsHelp what is a lead
+
+sendPaymentReminders send payment reminders
+sendPaymentReminders payment reminders
+sendPaymentReminders payment reminder
+sendPaymentReminders payment reminder only
+sendPaymentReminders payment reminders only
+
+whichReminder reminder
+whichReminder reminders
+whichReminder send reminders
+whichReminder reminders only
+whichReminder reminder only

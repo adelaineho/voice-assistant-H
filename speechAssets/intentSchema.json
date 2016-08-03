@@ -1,0 +1,25 @@
+{
+    "intents": [
+        {
+            "intent": "getSummary"
+        },
+        {
+            "intent": "getPendingLeads"
+        },
+        {
+            "intent": "sendPaymentReminders"
+        },
+        {
+            "intent": "leadsHelp"
+        },
+        {
+            "intent": "pendingLeadsHelp"
+        },
+        {
+            "intent": "whichReminder"
+        },
+        {
+            "intent": "AMAZON.HelpIntent"
+        }
+    ]
+}
