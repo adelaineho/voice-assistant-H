@@ -31,10 +31,25 @@
             "intent": "jokes_solveTyreKickers"
         },
         {
-            "intent": "AMAZON.YesIntent"
+          "intent": "AMAZON.YesIntent"
+        },
+        {
+          "intent": "accountBalance_leadCredit"
+        },
+        {
+          "intent": "accountBalance_daysCredit"
+        },
+        {
+          "intent": "howToBeAwesome_moreLeads"
+        },
+        {
+          "intent": "howToBeAwesome_priceBenchmark"
         },
         {
             "intent": "AMAZON.HelpIntent"
+        },
+        {
+          "intent": "AMAZON.NoIntent"
         }
     ]
 }
