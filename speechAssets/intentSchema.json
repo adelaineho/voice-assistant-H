@@ -19,7 +19,17 @@
             "intent": "planDay_whichReminder"
         },
         {
-            "intent": "jobComplete_markComplete"
+            "intent": "jobComplete_markComplete",
+            "slots": [
+                {
+                "name": "username",
+                "type": "AMAZON.US_FIRST_NAME"
+                },
+                {
+                    "name": "category",
+                    "type": "LIST_OF_CATEGORIES"
+                }
+            ]
         },
         {
             "intent": "jobComplete_sendPaymentRequest"

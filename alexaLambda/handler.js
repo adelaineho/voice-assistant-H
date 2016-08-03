@@ -53,6 +53,7 @@ hipages.prototype.eventHandlers.onSessionStarted = function (sessionStartedReque
     console.log("hipages onSessionStarted requestId: " + sessionStartedRequest.requestId
         + ", sessionId: " + session.sessionId);
     session.attributes.intents = session.attributes.intents || [];
+    session.attributes.data = session.attributes.data || [];
     // any initialization logic goes here
 };
 
@@ -69,15 +70,34 @@ hipages.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, 
     // any cleanup logic goes here
 };
 
-hipages.prototype.storeSessionInfo = function (session, intent) {
+hipages.prototype.storeIntentInSession = function (session, intent) {
     session.attributes.intents = session.attributes.intents || [];
     session.attributes.intents.push(intent);
     console.log(session.attributes.intents);
 };
 
+hipages.prototype.getLastIntentInSession = function (session) {
+    var lastIntent = this.getLastIntentInSession(session);
+    console.log(lastIntent);
+    return lastIntent;
+};
+
+hipages.prototype.storeDataInSession = function (session, source, key, value) {
+    session.attributes.data = session.attributes.data || [];
+    session.attributes.data[source] = session.attributes.data[source] || [];
+    session.attributes.data[source].push({key: value});
+    console.log(session.attributes.data);
+};
+
+hipages.prototype.getDataInSession = function (session, source, key) {
+    var data = session.attributes.data[source].key || '';
+    console.log(data);
+    return data;
+};
+
 hipages.prototype.intentHandlers = Object.assign({
     "AMAZON.YesIntent": function (intent, session, response) {
-        switch (session.attributes.intents.slice(-1)[0]) {
+        switch (this.getLastIntentInSession(session)) {
             case 'planDay_getSummary':
                 var speechOutput = "Would you like me to give you your leads, read your messages or send reminders for the outstanding payments?";
                 var cardTitle = "Please be more specific";
@@ -85,10 +105,9 @@ hipages.prototype.intentHandlers = Object.assign({
                 response.askWithCard(speechOutput, cardTitle, cardContent);
                 break;
             case 'jobComplete_markComplete':
-                this.storeSessionInfo(session, 'jobComplete_markComplete');
-                var speechOutput = "Payment request sent. I have also requested feedback from Mary.";
-                var cardTitle = "Payment request sent";
-                var cardContent = speechOutput;
+                var speechOutput = "How much for?";
+                var cardTitle = "How much?";
+                var cardContent = "I need to know how much for your payment request";
                 response.askWithCard(speechOutput, cardTitle, cardContent);
                 break;
             default:
@@ -97,17 +116,17 @@ hipages.prototype.intentHandlers = Object.assign({
                 var cardContent = speechOutput;
                 response.askWithCard(speechOutput, cardTitle, cardContent);
         }
-        this.storeSessionInfo(session, 'AMAZON.YesIntent');
+        this.storeIntentInSession(session, 'AMAZON.YesIntent');
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        this.storeSessionInfo(session, 'AMAZON.HelpIntent');
+        this.storeIntentInSession(session, 'AMAZON.HelpIntent');
         var speechOutput = "I can give you a full update, any information regarding your leads and advice on getting more leads or how to better convert your leads.";
         var cardTitle = "How I can help?";
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
     },
     "AMAZON.NoIntent": function (intent, session, response) {
-        switch (session.attributes.intents.slice(-1)[0]) {
+        switch (this.getLastIntentInSession(session)) {
             case 'accountBalance_daysCredit' :
                 var speechOutput = "Ok";
                 response.tell(speechOutput);
@@ -119,7 +138,7 @@ hipages.prototype.intentHandlers = Object.assign({
                 response.askWithCard(speechOutput, cardTitle, cardContent);
                 break;
         }
-        this.storeSessionInfo(session, 'AMAZON.NoIntent');
+        this.storeIntentInSession(session, 'AMAZON.NoIntent');
     }
 }, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
 

@@ -23,6 +23,7 @@ planDay_getPendingLeads what leads
 
 planDay_pendingLeadsHelp what do you mean by sending leads
 planDay_pendingLeadsHelp what are pending leads
+planDay_pendingLeadsHelp pending leads
 
 planDay_sendPaymentReminders send payment reminders
 planDay_sendPaymentReminders payment reminders
@@ -36,8 +37,12 @@ planDay_whichReminder send reminders
 planDay_whichReminder reminders only
 planDay_whichReminder reminder only
 
-jobComplete_markComplete mark job as completed
-jobComplete_markComplete completed a job
+jobComplete_markComplete mark {category} job for {username} as completed
+jobComplete_markComplete mark {category} job from {username} as completed
+jobComplete_markComplete completed a {category} job for {username}
+jobComplete_markComplete completed a {category} job from {username}
+jobComplete_markComplete finished {category} job for {username}
+jobComplete_markComplete finished {category} job from {username}
 
 jobComplete_sendPaymentRequest request payment
 jobComplete_sendPaymentRequest request payment for
@@ -48,6 +53,16 @@ message_sendMessage send a message to
 message_sendMessage reply message to
 message_sendMessage reply to
 message_sendMessage message
+message_sendMessage please send message
+message_sendMessage thank you message
+message_sendMessage compose message
+message_sendMessage send message saying thank you
+
+AMAZON.YesIntent yea
+AMAZON.YesIntent hell yea
+AMAZON.YesIntent for sure
+AMAZON.YesIntent of course
+AMAZON.YesIntent why not
 
 jokes_solveTyreKickers will you ever fix tyre kickers
 jokes_solveTyreKickers will you ever solve tyre kickers
