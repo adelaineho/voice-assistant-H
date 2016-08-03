@@ -77,7 +77,7 @@ hipages.prototype.storeIntentInSession = function (session, intent) {
 };
 
 hipages.prototype.getLastIntentInSession = function (session) {
-    var lastIntent = this.getLastIntentInSession(session);
+    var lastIntent = session.attributes.intents.slice(-1)[0];
     console.log(lastIntent);
     return lastIntent;
 };
