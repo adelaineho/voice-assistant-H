@@ -29,3 +29,8 @@ whichReminder reminders
 whichReminder send reminders
 whichReminder reminders only
 whichReminder reminder only
+
+solveTyreKickers will you ever fix tyre kickers
+solveTyreKickers will you ever solve tyre kickers
+solveTyreKickers tyre kicker
+solveTyreKickers tyre kickers

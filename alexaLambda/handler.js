@@ -27,8 +27,12 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
 /**
  * The AlexaSkill prototype and helper functions
  */
-var AlexaSkill = require('./AlexaSkill');
-var planDay = require('./planDay');
+var AlexaSkill = require('./vendor/AlexaSkill');
+var planDay = require('./intentHandlers/planDay');
+var accountBalance = require('./intentHandlers/accountBalance');
+var jobComplete = require('./intentHandlers/jobComplete');
+var howToBeAwesome = require('./intentHandlers/howToBeAwesome');
+var jokes = require('./intentHandlers/jokes');
 
 /**
  * hipages is a child of AlexaSkill.
@@ -78,7 +82,7 @@ hipages.prototype.intentHandlers = Object.assign({
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
     }
-}, planDay.intentHandlers);
+}, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers);
 
 // Create the handler that responds to the Alexa Request.
 var hipagesSkills = function index (event, context) {

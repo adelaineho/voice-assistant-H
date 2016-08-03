@@ -19,6 +19,9 @@
             "intent": "whichReminder"
         },
         {
+            "intent": "solveTyreKickers"
+        },
+        {
             "intent": "AMAZON.HelpIntent"
         }
     ]
