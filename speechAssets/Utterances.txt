@@ -37,32 +37,52 @@ planDay_whichReminder send reminders
 planDay_whichReminder reminders only
 planDay_whichReminder reminder only
 
-jobComplete_markComplete mark {category} job for {username} as completed
-jobComplete_markComplete mark {category} job from {username} as completed
+jobComplete_markComplete mark the {category} job for {username} as completed
+jobComplete_markComplete mark the {category} job from {username} as completed
 jobComplete_markComplete completed a {category} job for {username}
 jobComplete_markComplete completed a {category} job from {username}
-jobComplete_markComplete finished {category} job for {username}
-jobComplete_markComplete finished {category} job from {username}
+jobComplete_markComplete finished the {category} job for {username}
+jobComplete_markComplete finished the {category} job from {username}
+jobComplete_markComplete mark {username} {category} job as complete
+jobComplete_markComplete completed {username} {category} job
+jobComplete_markComplete finished {username} {category} job
 
-jobComplete_sendPaymentRequest request payment
-jobComplete_sendPaymentRequest request payment for
-jobComplete_sendPaymentRequest send payment request
+jobComplete_sendPaymentRequest request payment of {paymentAmount}
+jobComplete_sendPaymentRequest request payment for {paymentAmount}
+jobComplete_sendPaymentRequest {paymentAmount}
+jobComplete_sendPaymentRequest {paymentAmount} dollars
 
-message_sendMessage send message to
-message_sendMessage send a message to
-message_sendMessage reply message to
-message_sendMessage reply to
-message_sendMessage message
-message_sendMessage please send message
-message_sendMessage thank you message
-message_sendMessage compose message
-message_sendMessage send message saying thank you
-
-AMAZON.YesIntent yea
-AMAZON.YesIntent hell yea
-AMAZON.YesIntent for sure
-AMAZON.YesIntent of course
-AMAZON.YesIntent why not
+message_sendMessage send message to {username} {payment reminder|messageText}
+message_sendMessage send message to {username} {for payment|messageText}
+message_sendMessage send message to {username} {reminding him of payment|messageText}
+message_sendMessage send message to {username} {thank her|messageText}
+message_sendMessage send message to {username} {thank him|messageText}
+message_sendMessage send message to {username} {thank them|messageText}
+message_sendMessage send {payment reminder|messageText} message to {username}
+message_sendMessage send {for outstanding payment|messageText} message to {username}
+message_sendMessage send {for pending payment|messageText} message to {username}
+message_sendMessage send {payment reminder|messageText} message to {username}
+message_sendMessage send {thank you|messageText} message to {username}
+message_sendMessage send {thank her|messageText} message to {username}
+message_sendMessage send {thank him|messageText} message to {username}
+message_sendMessage send {thank them|messageText} message to {username}
+message_sendMessage send a {payment reminder|messageText} message to {username}
+message_sendMessage send a {thank you|messageText} message to {username}
+message_sendMessage send a {thank her|messageText} message to {username}
+message_sendMessage send a {thank him|messageText} message to {username}
+message_sendMessage send a {thank them|messageText} message to {username}
+message_sendMessage reply message to {username} {payment reminder|messageText}
+message_sendMessage reply message to {username} {thank you|messageText}
+message_sendMessage reply {payment reminder|messageText} message to {username}
+message_sendMessage reply {thank you|messageText} message to {username}
+message_sendMessage reply to {username} {payment reminder|messageText}
+message_sendMessage reply to {username} {thank you|messageText}
+message_sendMessage message {username} {payment reminder|messageText}
+message_sendMessage message {username} {thank you|messageText}
+message_sendMessage compose message to {username} {payment reminder|messageText}
+message_sendMessage compose message to {username} {thank you|messageText}
+message_sendMessage send message saying {payment reminder|messageText} to {username}
+message_sendMessage send message saying {thank you|messageText} to {username}
 
 jokes_solveTyreKickers will you ever fix tyre kickers
 jokes_solveTyreKickers will you ever solve tyre kickers
@@ -99,22 +119,15 @@ howToBeAwesome_moreLeads how can i increase my jobs
 howToBeAwesome_moreLeads convert more leads
 howToBeAwesome_moreLeads convert more jobs
 
-
 howToBeAwesome_priceBenchmark what is my benchmark
 howToBeAwesome_priceBenchmark how do i compare with other tradies
 howToBeAwesome_priceBenchmark how do i compare in terms of rating
 howToBeAwesome_priceBenchmark am i better that my peers
-howToBeAwesome_priceBenchmark am i better that other tradies
+howToBeAwesome_priceBenchmark am i better than other
 
-hipages {to fix a tap|Description}
-hipages {to clean the carpet|Description}
-hipages I need a tradie that {to clean the carpet|Description}
-hipages find me a tradie that {to clean the carpet|Description}
-hipages I need a somone that {to clean the carpet|Description}
-hipages find me a somone that {to clean the carpet|Description}
-hipages I need a tradie to {to clean the carpet|Description}
-hipages find me a tradie to {to clean the carpet|Description}
-hipages I need a somone to {to clean the carpet|Description}
-hipages find me a somone to {to clean the carpet|Description}
-hipages I have {to clean the carpet|Description}
-hipages I need to {to clean the carpet|Description}
+AMAZON.YesIntent yea
+AMAZON.YesIntent hell yea
+AMAZON.YesIntent for sure
+AMAZON.YesIntent of course
+AMAZON.YesIntent why not
+AMAZON.YesIntent send payment request

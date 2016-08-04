@@ -32,16 +32,29 @@
             ]
         },
         {
-            "intent": "jobComplete_sendPaymentRequest"
+            "intent": "jobComplete_sendPaymentRequest",
+            "slots": [
+                {
+                    "name": "paymentAmount",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
         },
         {
-            "intent": "message_sendMessage"
+            "intent": "message_sendMessage",
+            "slots": [
+                {
+                    "name": "username",
+                    "type": "AMAZON.US_FIRST_NAME"
+                },
+                {
+                    "name": "messageText",
+                    "type": "AMAZON.LITERAL"
+                }
+            ]
         },
         {
             "intent": "jokes_solveTyreKickers"
-        },
-        {
-          "intent": "AMAZON.YesIntent"
         },
         {
           "intent": "accountBalance_leadCredit"
@@ -57,6 +70,9 @@
         },
         {
             "intent": "AMAZON.HelpIntent"
+        },
+        {
+            "intent": "AMAZON.YesIntent"
         },
         {
           "intent": "AMAZON.NoIntent"

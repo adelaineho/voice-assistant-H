@@ -28,12 +28,12 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  * The AlexaSkill prototype and helper functions
  */
 var AlexaSkill = require('./vendor/AlexaSkill');
+var message = require('./intentHandlers/message');
 var planDay = require('./conversations/planDay');
 var accountBalance = require('./conversations/accountBalance');
 var jobComplete = require('./conversations/jobComplete');
 var howToBeAwesome = require('./conversations/howToBeAwesome');
 var jokes = require('./conversations/jokes');
-var message = require('./intentHandlers/message');
 
 /**
  * hipages is a child of AlexaSkill.
@@ -76,22 +76,33 @@ hipages.prototype.storeIntentInSession = function (session, intent) {
     console.log(session.attributes.intents);
 };
 
-hipages.prototype.getLastIntentInSession = function (session) {
-    var lastIntent = session.attributes.intents.slice(-1)[0];
+hipages.prototype.getLastIntentInSession = function (session, pos) {
+    pos = pos || -1;
+    console.log('getLastIntentInSession');
+    var lastIntent = session.attributes.intents.slice(pos)[0];
     console.log(lastIntent);
     return lastIntent;
 };
 
 hipages.prototype.storeDataInSession = function (session, source, key, value) {
-    session.attributes.data = session.attributes.data || [];
-    session.attributes.data[source] = session.attributes.data[source] || [];
-    session.attributes.data[source].push({key: value});
-    console.log(session.attributes.data);
+    session.attributes.dataInfo = session.attributes.dataInfo || {};
+    if (!Array.isArray(session.attributes.dataInfo[source])) {
+        session.attributes.dataInfo[source] = [];
+    }
+    var keyValue = {};
+    keyValue[key] = value;
+    session.attributes.dataInfo[source].push(keyValue);
 };
 
 hipages.prototype.getDataInSession = function (session, source, key) {
-    var data = session.attributes.data[source].key || '';
-    console.log(data);
+    var data = '';
+    if (Array.isArray(session.attributes.dataInfo[source])) {
+        for (var i in session.attributes.dataInfo[source]) {
+            if (session.attributes.dataInfo[source][i].hasOwnProperty(key)) {
+                data = session.attributes.dataInfo[source][i][key];
+            }
+        }
+    }
     return data;
 };
 
