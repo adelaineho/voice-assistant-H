@@ -47,6 +47,8 @@ jobComplete_markComplete mark {username} {category} job as complete
 jobComplete_markComplete completed {username} {category} job
 jobComplete_markComplete finished {username} {category} job
 
+jobComplete_sendPaymentRequest request payment
+jobComplete_sendPaymentRequest yes request payment
 jobComplete_sendPaymentRequest request payment of {paymentAmount}
 jobComplete_sendPaymentRequest request payment for {paymentAmount}
 jobComplete_sendPaymentRequest {paymentAmount}
