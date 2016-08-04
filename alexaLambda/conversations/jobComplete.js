@@ -23,7 +23,7 @@ jobComplete.prototype.intentHandlers = {
             var cardTitle = "How much?";
             var cardContent = "I need to know how much for your payment request";
             response.askWithCard(speechOutput, cardTitle, cardContent);
-            break;
+            return;
         }
         // users who give an amount with no context or the previous intent is yes but is not job marked complete
         if ((lastIntent != 'jobComplete_markComplete') || (lastIntent == 'AMAZON.YesIntent' && secondLastIntent != 'jobComplete_markComplete')) {

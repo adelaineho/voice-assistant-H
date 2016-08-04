@@ -129,36 +129,43 @@ hipages.prototype.intentHandlers = Object.assign({
         }
         this.storeIntentInSession(session, 'AMAZON.YesIntent');
     },
+    "AMAZON.NoIntent": function (intent, session, response) {
+    switch (this.getLastIntentInSession(session)) {
+        case 'accountBalance_daysCredit' :
+            var speechOutput = "Ok";
+            response.tell(speechOutput);
+            break;
+        default :
+            var speechOutput = "How I can help.";
+            var cardTitle = "Hello";
+            var cardContent = speechOutput;
+            response.askWithCard(speechOutput, cardTitle, cardContent);
+            break;
+    }
+    this.storeIntentInSession(session, 'AMAZON.NoIntent');
+    },
     "AMAZON.HelpIntent": function (intent, session, response) {
         this.storeIntentInSession(session, 'AMAZON.HelpIntent');
-        var speechOutput = "I can give you a full update, any information regarding your leads and advice on getting more leads or how to better convert your leads.";
+        var speechOutput = "I can help you with getting an update on hipages, checking your account balance, completing jobs and advice on how to improve.";
         var cardTitle = "How I can help?";
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
     },
-    "AMAZON.NoIntent": function (intent, session, response) {
-        switch (this.getLastIntentInSession(session)) {
-            case 'accountBalance_daysCredit' :
-                var speechOutput = "Ok";
-                response.tell(speechOutput);
-                break;
-            default :
-                var speechOutput = "How I can help.";
-                var cardTitle = "Hello";
-                var cardContent = speechOutput;
-                response.askWithCard(speechOutput, cardTitle, cardContent);
-                break;
-        }
-        this.storeIntentInSession(session, 'AMAZON.NoIntent');
+    "AMAZON.CancelIntent": function (intent, session, response) {
+        this.storeIntentInSession(session, 'AMAZON.CancelIntent');
+        var speechOutput = "Have a nice day. Let's get a beer together one time";
+        var cardTitle = "Got it!";
+        var cardContent = "Have a nice day. Let's get a beer together one time!";
+        response.tellWithCard(speechOutput, cardTitle, cardContent);
+    },
+    "AMAZON.StopIntent": function (intent, session, response) {
+        this.storeIntentInSession(session, 'AMAZON.StopIntent');
+        var speechOutput = "Calm down";
+        var cardTitle = "Ok bye!";
+        var cardContent = "(Calm down...)";
+        response.askWithCard(speechOutput, cardTitle, cardContent);
     }
 }, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
-
-// Create the handler that responds to the Alexa Request.
-var hipagesSkills = function index (event, context) {
-    // Create an instance of the hipages skill.
-    var hipagesSkill = new hipages();
-    hipagesSkill.execute(event, context);
-};
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function index (event, context) {

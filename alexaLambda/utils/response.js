@@ -1,5 +1,6 @@
 'use strict';
 var http = require('http');
+
 var baseUrl = 'http://fe6.stg.aws.viteknologies.com.au';
 function response() {}
 
