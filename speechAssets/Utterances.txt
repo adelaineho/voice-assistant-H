@@ -74,7 +74,7 @@ message_sendMessage send a {thank her|messageText} message to {username}
 message_sendMessage send a {thank him|messageText} message to {username}
 message_sendMessage send a {thank them|messageText} message to {username}
 message_sendMessage reply message to {username} {payment reminder|messageText}
-message_sendMessage reply message to {username} {thank you|messageText}
+message_sendMessage reply message to {username} say {thank you|messageText}
 message_sendMessage reply {payment reminder|messageText} message to {username}
 message_sendMessage reply {thank you|messageText} message to {username}
 message_sendMessage reply to {username} {payment reminder|messageText}

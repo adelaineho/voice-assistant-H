@@ -15,9 +15,16 @@ jobComplete.prototype.intentHandlers = {
     },
     "jobComplete_sendPaymentRequest": function (intent, session, response) {
         //get payment amount
-        var paymentAmount = intent.slots.paymentAmount.value;
+        var paymentAmount = intent.slots.paymentAmount.value || '';
         var secondLastIntent = this.getLastIntentInSession(session, -2);
         var lastIntent = this.getLastIntentInSession(session);
+        if (paymentAmount != '') {
+            var speechOutput = "How much for?";
+            var cardTitle = "How much?";
+            var cardContent = "I need to know how much for your payment request";
+            response.askWithCard(speechOutput, cardTitle, cardContent);
+            break;
+        }
         // users who give an amount with no context or the previous intent is yes but is not job marked complete
         if ((lastIntent != 'jobComplete_markComplete') || (lastIntent == 'AMAZON.YesIntent' && secondLastIntent != 'jobComplete_markComplete')) {
             var speechOutput = "What is that number for?";
