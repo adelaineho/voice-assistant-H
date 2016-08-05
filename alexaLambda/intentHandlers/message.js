@@ -1,5 +1,7 @@
 'use strict';
 
+var jobCompleteService = require('../services/jobComplete');
+
 function message() {}
 
 message.prototype.intentHandlers = {
@@ -21,11 +23,29 @@ message.prototype.intentHandlers = {
                 var speechOutput = "Message sent";
                 var cardTitle = "Message sent to Sam";
                 var cardContent = '"My apologies Sam. The cost for the job is $1,200 including GST. I will send you a written quote tonight."';
+                response.askWithCard(speechOutput, cardTitle, cardContent);
                 break;
             case 'jobComplete_sendPaymentRequest':
-                var speechOutput = "Personal thank you message to Mary is sent and I've thanked her for the lemonade!";
-                var cardTitle = "Thank you message sent";
-                var cardContent = "You personal thank you message sent to Mary and I've thanked her for the lemonade!";
+                var that = this;
+                var alexaResponse = response;
+                var message = 'Hey Sam, thank you for the job. I have sent through a payment request and thanks for the lemonade. Tom';
+                console.log('send message last intent payment request');
+                jobCompleteService.sendMessage(message, function(res) {
+                    console.log(res);
+                    if(res) {
+                        console.log('yes res');
+                        var username = that.getDataInSession(session, that.getLastIntentInSession(session), 'username');
+                        var speechOutput = "Personal thank you message to " + username + " is sent and I have thanked her for the lemonade";
+                        var cardTitle = "Thank you message sent";
+                        var cardContent = "You personal thank you message sent to " + username + " and I've thanked her for the lemonade!";
+                    } else {
+                        var username = that.getDataInSession(session, that.getLastIntentInSession(session), 'username');
+                        var speechOutput = "Personal thank you message to " + username + " is sent and I have thanked her for the lemonade";
+                        var cardTitle = "Thank you message sent";
+                        var cardContent = "You personal thank you message sent to " + username + " and I've thanked her for the lemonade!";
+                    }
+                    alexaResponse.askWithCard(speechOutput, cardTitle, cardContent);
+                });
                 break;
             default:
                 if(username && messageType) {
@@ -41,9 +61,10 @@ message.prototype.intentHandlers = {
                     var cardTitle = "To whom?";
                     var cardContent = 'Who would you like me to send a message to?';
                 }
+                response.askWithCard(speechOutput, cardTitle, cardContent);
+                break;
         }
         this.storeIntentInSession(session, 'message_sendMessage');
-        response.askWithCard(speechOutput, cardTitle, cardContent);
     }
 };
 

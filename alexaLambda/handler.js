@@ -29,9 +29,10 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  */
 var AlexaSkill = require('./vendor/AlexaSkill');
 var message = require('./intentHandlers/message');
+var generic = require('./conversations/generic');
 var planDay = require('./conversations/planDay');
-var accountBalance = require('./conversations/accountBalance');
 var jobComplete = require('./conversations/jobComplete');
+var accountBalance = require('./conversations/accountBalance');
 var howToBeAwesome = require('./conversations/howToBeAwesome');
 var jokes = require('./conversations/jokes');
 
@@ -135,10 +136,14 @@ hipages.prototype.intentHandlers = Object.assign({
             var speechOutput = "Ok";
             response.tell(speechOutput);
             break;
+        case 'planDay_getSummary' :
+            var speechOutput = "Ok. Let me know when you're ready";
+            response.tell(speechOutput);
+            break;
         default :
-            var speechOutput = "How I can help.";
-            var cardTitle = "Hello";
-            var cardContent = speechOutput;
+            var speechOutput = "Not sure what you're referring to";
+            var cardTitle = "I'm lost";
+            var cardContent = "Can you be more specific?";
             response.askWithCard(speechOutput, cardTitle, cardContent);
             break;
     }
@@ -165,7 +170,7 @@ hipages.prototype.intentHandlers = Object.assign({
         var cardContent = "(Calm down...)";
         response.askWithCard(speechOutput, cardTitle, cardContent);
     }
-}, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
+}, generic.intentHandlers, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function index (event, context) {

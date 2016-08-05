@@ -1,15 +1,31 @@
-planDay_getSummary morning H
-planDay_getSummary hi H
-planDay_getSummary hello H
-planDay_getSummary morning
-planDay_getSummary hi
-planDay_getSummary hello
-planDay_getSummary good morning
-planDay_getSummary good morning H
+generic_greeting H
+generic_greeting yo
+generic_greeting yo H
+generic_greeting hi
+generic_greeting hi H
+generic_greeting hey
+generic_greeting hey H
+generic_greeting hello
+generic_greeting hello H
+generic_greeting morning
+generic_greeting morning H
+generic_greeting good morning
+generic_greeting good morning H
+
+planDay_getSummary update
+planDay_getSummary update please
+planDay_getSummary updates
+planDay_getSummary updates please
+planDay_getSummary summary
 planDay_getSummary today's updates
 planDay_getSummary hi pages updates
 planDay_getSummary today's summary
 planDay_getSummary hi pages summary
+planDay_getSummary what are my hi pages updates
+planDay_getSummary get hi pages update
+planDay_getSummary what's my hi pages update
+planDay_getSummary what's my update
+planDay_getSummary update for today
 
 planDay_readMessages read me my messages
 planDay_readMessages read messages
@@ -18,8 +34,15 @@ planDay_readMessages tell me my messages
 
 planDay_getPendingLeads pending leads
 planDay_getPendingLeads what are the leads
+planDay_getPendingLeads what are my leads
 planDay_getPendingLeads tell me about the leads
-planDay_getPendingLeads what leads
+planDay_getPendingLeads read me my leads
+planDay_getPendingLeads read the leads
+planDay_getPendingLeads give me leads
+planDay_getPendingLeads give me the leads
+planDay_getPendingLeads what leads do i have today
+planDay_getPendingLeads pending invitations
+planDay_getPendingLeads i want to know my leads
 
 planDay_pendingLeadsHelp what do you mean by sending leads
 planDay_pendingLeadsHelp what are pending leads
@@ -46,9 +69,11 @@ jobComplete_markComplete finished the {category} job from {username}
 jobComplete_markComplete mark {username} {category} job as complete
 jobComplete_markComplete completed {username} {category} job
 jobComplete_markComplete finished {username} {category} job
+jobComplete_markComplete mark {username} {category} job as completed
 
 jobComplete_sendPaymentRequest request payment
 jobComplete_sendPaymentRequest yes request payment
+jobComplete_sendPaymentRequest Yes request payment
 jobComplete_sendPaymentRequest request payment of {paymentAmount}
 jobComplete_sendPaymentRequest request payment for {paymentAmount}
 jobComplete_sendPaymentRequest {paymentAmount}
@@ -105,7 +130,18 @@ accountBalance_leadCredit value cap used
 accountBalance_leadCredit value cap remaining
 accountBalance_leadCredit value cap usage
 accountBalance_leadCredit usage
+accountBalance_leadCredit leads claimed
+accountBalance_leadCredit leads claimed so far
+accountBalance_leadCredit how many leads claimed
+accountBalance_leadCredit how many leads claimed this month
+accountBalance_leadCredit account usage
+accountBalance_leadCredit check my account balance
+accountBalance_leadCredit how many leads have i used so far this month
+accountBalance_leadCredit how much lead credit remaining this month
+accountBalance_leadCredit lead balance this month
 
+accountBalance_daysCredit days credit this month
+accountBalance_daysCredit days until credit resets
 accountBalance_daysCredit how many days have I got left in this month
 accountBalance_daysCredit do i have credit for the rest of this month
 accountBalance_daysCredit do i have credit left for the rest of this month
@@ -133,3 +169,7 @@ AMAZON.YesIntent for sure
 AMAZON.YesIntent of course
 AMAZON.YesIntent why not
 AMAZON.YesIntent send payment request
+AMAZON.YesIntent Yes
+
+AMAZON.HelpIntent what can you help me with
+AMAZON.HelpIntent what can i ask

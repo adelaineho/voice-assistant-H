@@ -1,5 +1,7 @@
 'use strict';
 
+var jobCompleteService = require('../services/jobComplete');
+
 function jobComplete() {}
 
 jobComplete.prototype.intentHandlers = {
@@ -18,7 +20,8 @@ jobComplete.prototype.intentHandlers = {
         var paymentAmount = intent.slots.paymentAmount.value || '';
         var secondLastIntent = this.getLastIntentInSession(session, -2);
         var lastIntent = this.getLastIntentInSession(session);
-        if (paymentAmount != '') {
+        //if no payment amount captured
+        if (paymentAmount == '') {
             var speechOutput = "How much for?";
             var cardTitle = "How much?";
             var cardContent = "I need to know how much for your payment request";
@@ -41,6 +44,21 @@ jobComplete.prototype.intentHandlers = {
         var cardTitle = "Payment request sent";
         var cardContent = "Payment request of $" + paymentAmount + " is sent. I have also requested feedback from " + username + ".";
         response.askWithCard(speechOutput, cardTitle, cardContent);
+//        jobCompleteService.paymentRequest(paymentAmount, function(error, res) {
+//            if(res) {
+//                var username = this.getDataInSession(session, this.getLastIntentInSession(session), 'username');
+//                var speechOutput = "Payment request of " + paymentAmount + " dollars is sent. I have also requested feedback from " + username + ".";
+//                var cardTitle = "Payment request sent";
+//                var cardContent = "Payment request of $" + paymentAmount + " is sent. I have also requested feedback from " + username + ".";
+//                response.askWithCard(speechOutput, cardTitle, cardContent);
+//            } else {
+//                var username = this.getDataInSession(session, this.getLastIntentInSession(session), 'username');
+//                var speechOutput = "Payment request of " + paymentAmount + " dollars is sent. I have also requested feedback from " + username + ".";
+//                var cardTitle = "Payment request sent";
+//                var cardContent = "Payment request of $" + paymentAmount + " is sent. I have also requested feedback from " + username + ".";
+//                response.askWithCard(speechOutput, cardTitle, cardContent);
+//            }
+//        });
     }
 };
 

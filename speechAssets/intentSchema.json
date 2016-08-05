@@ -1,6 +1,9 @@
 {
     "intents": [
         {
+            "intent": "generic_greeting"
+        },
+        {
             "intent": "planDay_getSummary"
         },
         {
@@ -76,6 +79,12 @@
         },
         {
           "intent": "AMAZON.NoIntent"
+        },
+        {
+            "intent": "AMAZON.CancelIntent"
+        },
+        {
+            "intent": "AMAZON.StopIntent"
         }
     ]
 }

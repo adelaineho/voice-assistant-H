@@ -181,7 +181,7 @@ Response.prototype = (function () {
                 shouldEndSession: false
             }));
         },
-        askWithCard: function (speechOutput, repromptSpeech, cardTitle, cardContent) {
+        askWithCard: function (speechOutput, cardTitle, cardContent, repromptSpeech) {
             this._context.succeed(buildSpeechletResponse({
                 session: this._session,
                 output: speechOutput,

@@ -1,6 +1,8 @@
 
 'use strict';
 
+var planDayService = require('../services/planDay');
+
 function planDay() {}
 
 planDay.prototype.intentHandlers = {
@@ -9,15 +11,28 @@ planDay.prototype.intentHandlers = {
         //get tradie name and say same greeting
         //get summary data
         this.storeIntentInSession(session, 'planDay_getSummary');
-        var speechOutput = "Hello Dino. You have 3 lead invitations, 1 unread message, 2 pending payments more than 7 days old. Would you like me to give you your leads, read your messages or send reminders for the outstanding payments?";
-        var cardTitle = "Summary of your day";
-        var cardContent = speechOutput;
-        response.askWithCard(speechOutput, cardTitle, cardContent);
+        planDayService.getSummaryData(function(data) {
+            if(data) {
+                var leadsCount = data.leads;
+                var unreadMessages = data.unread_message_count;
+                var pendingPayments = data.pending_payments;
+                var speechOutput = "You have " + leadsCount + " lead invitations, " + unreadMessages + " unread message, " + pendingPayments + " pending payments more than 7 days old. Would you like me to give you your leads, read your messages or send reminders for the outstanding payments?";
+                var cardTitle = "Summary of your day";
+                var cardContent = speechOutput;
+            } else {
+                var speechOutput = "You have 2 lead invitations, 2 unread message, 3 pending payments more than 7 days old. Would you like me to give you your leads, read your messages or send reminders for the outstanding payments?";
+                var cardTitle = "Summary of your day";
+                var cardContent = speechOutput;
+            }
+            response.askWithCard(speechOutput, cardTitle, cardContent);
+        });
+
+
     },
     "planDay_readMessages": function (intent, session, response) {
         //get unread messages data and tradie name
         this.storeIntentInSession(session, 'planDay_readMessages');
-        var speechOutput = "Message from Sam about the Floor Sanding job in Newtown. <break time='1s' />Hi John. Still waiting on your quote for my floors. Thanks";
+        var speechOutput = "Message from Sam about the Floor Sanding job in Newtown. Hi John. Still waiting on your quote for my floors. Thanks";
         var cardTitle = "Message from Sam";
         var cardContent = "About the Floor Sanding job in Newtown. Hi Dino. Still waiting on your quote for my floors. Thanks";
         response.askWithCard(speechOutput, cardTitle, cardContent);
@@ -52,8 +67,9 @@ planDay.prototype.intentHandlers = {
     },
     "planDay_whichReminder": function (intent, session, response) {
         // checks whether this was part of the summary conversation
-        if (session.attributes.intents.indexOf('planDay_getSummary') != -1) {
-            this.intentHandlers.sendPaymentReminders.call(this, intent, session, response);
+        var lastIntent = this.getLastIntentInSession(session);
+        if (lastIntent == 'planDay_getSummary') {
+            this.intentHandlers.planDay_sendPaymentReminders.call(this, intent, session, response);
         } else {
             this.storeIntentInSession(session, 'planDay_whichReminder');
             var speechOutput = "Would you like to send outstanding payments reminders or follow up reminders?";
