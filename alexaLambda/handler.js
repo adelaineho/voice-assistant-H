@@ -151,7 +151,7 @@ hipages.prototype.intentHandlers = Object.assign({
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
         this.storeIntentInSession(session, 'AMAZON.HelpIntent');
-        var speechOutput = "I can help you with getting an update on hipages, checking your account balance, completing jobs and advice on how to improve.";
+        var speechOutput = "I can help you with getting an update on hi pages, checking your account balance, completing jobs and advice on how to improve.";
         var cardTitle = "How I can help?";
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);
@@ -168,7 +168,7 @@ hipages.prototype.intentHandlers = Object.assign({
         var speechOutput = "Calm down";
         var cardTitle = "Ok bye!";
         var cardContent = "(Calm down...)";
-        response.askWithCard(speechOutput, cardTitle, cardContent);
+        response.tellWithCard(speechOutput, cardTitle, cardContent);
     }
 }, generic.intentHandlers, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
 

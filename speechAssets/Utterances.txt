@@ -25,6 +25,8 @@ planDay_getSummary what are my hi pages updates
 planDay_getSummary get hi pages update
 planDay_getSummary what's my hi pages update
 planDay_getSummary what's my update
+planDay_getSummary what are my updates
+planDay_getSummary what are my updates for today
 planDay_getSummary update for today
 
 planDay_readMessages read me my messages
@@ -76,8 +78,8 @@ jobComplete_sendPaymentRequest yes request payment
 jobComplete_sendPaymentRequest Yes request payment
 jobComplete_sendPaymentRequest request payment of {paymentAmount}
 jobComplete_sendPaymentRequest request payment for {paymentAmount}
-jobComplete_sendPaymentRequest {paymentAmount}
-jobComplete_sendPaymentRequest {paymentAmount} dollars
+jobComplete_sendPaymentRequest yes request payment of {paymentAmount}
+jobComplete_sendPaymentRequest yes request payment of {paymentAmount}
 
 message_sendMessage send message to {username} {payment reminder|messageText}
 message_sendMessage send message to {username} {for payment|messageText}
@@ -110,6 +112,11 @@ message_sendMessage compose message to {username} {payment reminder|messageText}
 message_sendMessage compose message to {username} {thank you|messageText}
 message_sendMessage send message saying {payment reminder|messageText} to {username}
 message_sendMessage send message saying {thank you|messageText} to {username}
+message_sendMessage send {username} a {quote|messageText}
+message_sendMessage send {username} a {quote|messageText} of dollars
+message_sendMessage send {username} a {quote|messageText} for dollars
+message_sendMessage send {username} a {quote|messageText} of one thousand two hundred dollars
+message_sendMessage send {username} a {quote|messageText} for one thousand two hundred dollars
 
 jokes_solveTyreKickers will you ever fix tyre kickers
 jokes_solveTyreKickers will you ever solve tyre kickers

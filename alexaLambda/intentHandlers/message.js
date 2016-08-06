@@ -19,7 +19,7 @@ message.prototype.intentHandlers = {
         var username = intent.slots.username.value || '';
         this.storeDataInSession(session, 'message_sendMessage', 'messageText', messageText);
         switch (this.getLastIntentInSession(session)) {
-            case 'planDay_getSummary':
+            case 'planDay_readMessages':
                 var speechOutput = "Message sent";
                 var cardTitle = "Message sent to Sam";
                 var cardContent = '"My apologies Sam. The cost for the job is $1,200 including GST. I will send you a written quote tonight."';

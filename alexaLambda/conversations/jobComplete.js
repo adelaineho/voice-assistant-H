@@ -10,7 +10,7 @@ jobComplete.prototype.intentHandlers = {
         var username = intent.slots.username.value;
         this.storeIntentInSession(session, 'jobComplete_markComplete');
         this.storeDataInSession(session, 'jobComplete_markComplete', 'username', username);
-        var speechOutput = "Job has been marked as completed. Would you like to request payment from " + username + "?";
+        var speechOutput = "Job has been marked as completed. Would you like to request payment from Sam?";
         var cardTitle = "Job marked as complete";
         var cardContent = speechOutput;
         response.askWithCard(speechOutput, cardTitle, cardContent);

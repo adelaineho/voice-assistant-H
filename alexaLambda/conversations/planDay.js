@@ -32,7 +32,7 @@ planDay.prototype.intentHandlers = {
     "planDay_readMessages": function (intent, session, response) {
         //get unread messages data and tradie name
         this.storeIntentInSession(session, 'planDay_readMessages');
-        var speechOutput = "Message from Sam about the Floor Sanding job in Newtown. Hi John. Still waiting on your quote for my floors. Thanks";
+        var speechOutput = "Message from Sam about the Floor Sanding job in Newtown. Hi Tom. Still waiting on your quote for my floors. Thanks";
         var cardTitle = "Message from Sam";
         var cardContent = "About the Floor Sanding job in Newtown. Hi Dino. Still waiting on your quote for my floors. Thanks";
         response.askWithCard(speechOutput, cardTitle, cardContent);
