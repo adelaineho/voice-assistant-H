@@ -79,7 +79,7 @@ jobComplete_sendPaymentRequest Yes request payment
 jobComplete_sendPaymentRequest request payment of {paymentAmount}
 jobComplete_sendPaymentRequest request payment for {paymentAmount}
 jobComplete_sendPaymentRequest yes request payment of {paymentAmount}
-jobComplete_sendPaymentRequest yes request payment of {paymentAmount}
+jobComplete_sendPaymentRequest yes request payment for {paymentAmount}
 
 message_sendMessage send message to {username} {payment reminder|messageText}
 message_sendMessage send message to {username} {for payment|messageText}
@@ -115,8 +115,8 @@ message_sendMessage send message saying {thank you|messageText} to {username}
 message_sendMessage send {username} a {quote|messageText}
 message_sendMessage send {username} a {quote|messageText} of dollars
 message_sendMessage send {username} a {quote|messageText} for dollars
-message_sendMessage send {username} a {quote|messageText} of one thousand two hundred dollars
-message_sendMessage send {username} a {quote|messageText} for one thousand two hundred dollars
+message_sendMessage send {username} a {quote of|messageText}
+message_sendMessage send {username} a {quote for|messageText}
 
 jokes_solveTyreKickers will you ever fix tyre kickers
 jokes_solveTyreKickers will you ever solve tyre kickers
