@@ -4,6 +4,15 @@
             "intent": "generic_greeting"
         },
         {
+            "intent": "generic_getAmount",
+            "slots": [
+              {
+                "name": "paymentAmount",
+                "type": "AMAZON.NUMBER"
+              }
+            ]
+        },
+        {
             "intent": "planDay_getSummary"
         },
         {

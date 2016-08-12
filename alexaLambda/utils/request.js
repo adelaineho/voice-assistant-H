@@ -1,11 +1,12 @@
 'use strict';
+
 var http = require('http');
 
 var baseUrl = 'http://fe6.stg.aws.viteknologies.com.au';
 
-function request() {}
+function RequestHttp() {}
 
-request.prototype.getUrl = function (path, callback) {
+RequestHttp.prototype.getUrl = function (path, callback) {
     var responseData = '';
     http.get(baseUrl + path, function (res) {
         console.log('Status Code: ' + res.statusCode);
@@ -18,8 +19,12 @@ request.prototype.getUrl = function (path, callback) {
         });
 
         res.on('end', function () {
-            var responseDataObject = JSON.parse(responseData);
-
+            try {
+                var responseDataObject = JSON.parse(responseData);
+            } catch(e) {
+                console.log(e);
+                var responseDataObject = { error : { message : 'JSON error. Can not parse response'} };
+            }
             if (responseDataObject.error) {
                 console.log("error: " + responseDataObject.error.message);
                 callback(new Error(responseDataObject.error.message));
@@ -34,4 +39,4 @@ request.prototype.getUrl = function (path, callback) {
     });
 };
 
-module.exports = new request();
+module.exports = new RequestHttp();
