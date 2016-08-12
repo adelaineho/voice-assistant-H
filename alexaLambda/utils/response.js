@@ -1,6 +1,6 @@
 'use strict';
 
-//var requestPost = require('../node_modules/request');
+var requestPost = require('request');
 
 var baseUrl = 'http://fe6.stg.aws.viteknologies.com.au';
 
@@ -18,7 +18,7 @@ ResponseHttp.prototype.post = function (path, data, callback) {
             }
         ]
     };
-    //requestPost.post(postData, callback);
+    requestPost.post(postData, callback);
 };
 
 module.exports = new ResponseHttp();

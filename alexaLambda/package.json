@@ -1,0 +1,14 @@
+{
+  "name": "voice-assistant-H",
+  "version": "1.0.0",
+  "description": "Voice assistan using Alexa and Amazon Lambda",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adelaine Ho and Diana De Vargas",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.74.0"
+  }
+}
