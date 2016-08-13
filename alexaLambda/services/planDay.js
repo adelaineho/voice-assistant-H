@@ -3,9 +3,9 @@
 var getter = require('../utils/request');
 var setter = require('../utils/response');
 
-function planDay() {}
+function PlanDayService() {}
 
-planDay.prototype.getSummaryData = function(callback) {
+PlanDayService.prototype.getSummaryData = function(callback) {
     console.log('getSummaryData called');
     getter.getUrl('/planday_getsummary', function (error, res) {
         console.log('getUrl called');
@@ -15,8 +15,9 @@ planDay.prototype.getSummaryData = function(callback) {
         }
         console.log('res available');
         console.log(res);
-        callback(res.response);
+        var httpResponse = res ? res.response : null;
+        callback(httpResponse);
     });
 };
 
-module.exports = new planDay();
+module.exports = new PlanDayService();

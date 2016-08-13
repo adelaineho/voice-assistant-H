@@ -80,6 +80,13 @@ jobComplete_sendPaymentRequest request payment of {paymentAmount}
 jobComplete_sendPaymentRequest request payment for {paymentAmount}
 jobComplete_sendPaymentRequest yes request payment of {paymentAmount}
 jobComplete_sendPaymentRequest yes request payment for {paymentAmount}
+jobComplete_sendPaymentRequest request payment of {paymentAmount} dollars
+jobComplete_sendPaymentRequest request payment for {paymentAmount} dollars
+jobComplete_sendPaymentRequest yes request payment of {paymentAmount} dollars
+jobComplete_sendPaymentRequest yes request payment for {paymentAmount} dollars
+
+generic_getAmount {paymentAmount}
+generic_getAmount {paymentAmount} dollars
 
 message_sendMessage send message to {username} {payment reminder|messageText}
 message_sendMessage send message to {username} {for payment|messageText}

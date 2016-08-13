@@ -1,25 +1,5 @@
 'use strict';
 /**
- Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
- Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
-
- http://aws.amazon.com/apache2.0/
-
- or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
- */
-
-/**
- * This simple sample has no external dependencies or session management, and shows the most basic
- * example of how to create a Lambda function for handling Alexa Skill requests.
- *
- * Examples:
- * One-shot model:
- *  User: "Alexa, tell Greeter to say hello"
- *  Alexa: "Hello World!"
- */
-
-/**
  * App ID for the skill
  */
 var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
@@ -29,12 +9,13 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  */
 var AlexaSkill = require('./vendor/AlexaSkill');
 var message = require('./intentHandlers/message');
-var generic = require('./conversations/generic');
-var planDay = require('./conversations/planDay');
-var jobComplete = require('./conversations/jobComplete');
-var accountBalance = require('./conversations/accountBalance');
-var howToBeAwesome = require('./conversations/howToBeAwesome');
-var jokes = require('./conversations/jokes');
+var generic = require('./intentHandlers/conversations/generic');
+var planDay = require('./intentHandlers/conversations/planDay');
+var jobComplete = require('./intentHandlers/conversations/jobComplete');
+var accountBalance = require('./intentHandlers/conversations/accountBalance');
+var howToBeAwesome = require('./intentHandlers/conversations/howToBeAwesome');
+var jokes = require('./intentHandlers/conversations/jokes');
+var util = require('util');
 
 /**
  * hipages is a child of AlexaSkill.
@@ -47,44 +28,144 @@ var hipages = function () {
 };
 
 // Extend AlexaSkill
-hipages.prototype = Object.create(AlexaSkill.prototype);
-hipages.prototype.constructor = hipages;
+util.inherits(hipages, AlexaSkill);
 
-hipages.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-    console.log("hipages onSessionStarted requestId: " + sessionStartedRequest.requestId
-        + ", sessionId: " + session.sessionId);
+/**
+ * Global variables to use in the Object
+ *
+ * @type {{
+ *      currentIntent: string,  stores the current intent
+ *      lastIntent: string,     stores the last intent
+ *      waitingIntent: string,  stores the intent waiting for response
+ *      speechOutput: string,   speech out to use in the response
+ *      cardTitle: string,      card title to use in the response
+ *      cardContent: string,    card content to use in the response
+ *      repromptSpeech: string  reprompt to use in the response
+ *      }}
+ */
+hipages.prototype.vars = {
+    currentIntent   : '',
+    lastIntent      : '',
+    waitingIntent   : '',
+    speechOutput    : '',
+    cardTitle       : '',
+    cardContent     : '',
+    repromptSpeech  : ''
+};
+
+/**
+ * Reset vars values
+ */
+hipages.prototype.resetVars = function () {
+    this.vars.currentIntent = '';
+    this.vars.lastIntent    = '';
+    this.vars.waitingIntent = '';
+    this.vars.speechOutput  = '';
+    this.vars.cardTitle     = '';
+    this.vars.cardContent   = '';
+    this.vars.repromptSpeech= '';
+};
+
+/**
+ * Init the session attributes
+ *
+ * @param session
+ */
+hipages.prototype.initSessionAttributes = function (session) {
+    session.attributes = session.attributes || {};
     session.attributes.intents = session.attributes.intents || [];
-    session.attributes.data = session.attributes.data || [];
-    // any initialization logic goes here
+    session.attributes.intentsWaitingResponse = session.attributes.intentsWaitingResponse || '';
+    session.attributes.dataInfo = session.attributes.dataInfo || [];
 };
 
-hipages.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    console.log("hipages onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "I can give you a summary, any information regarding your leads and advice on getting more leads or how to better convert your leads.";
-    var repromptText = "Don't be shy! How can I help?";
-    response.ask(speechOutput, repromptText);
+/**
+ * Reset the session attributes
+ *
+ * @param session
+ */
+hipages.prototype.resetSessionAttributes = function (session) {
+    session.attributes = session.attributes || {};
+    session.attributes.intents = [];
+    session.attributes.intentsWaitingResponse = '';
+    session.attributes.dataInfo = [];
 };
 
-hipages.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-    console.log("hipages onSessionEnded requestId: " + sessionEndedRequest.requestId
-        + ", sessionId: " + session.sessionId);
-    // any cleanup logic goes here
+
+
+/**
+ * Function to response via Alexa and end the session
+ *
+ * @param response
+ */
+hipages.prototype.tell = function (response) {
+    response.tell(this.vars.speechOutput);
 };
 
+/**
+ * Function to response via Alexa with cards and end the session
+ *
+ * @param response
+ */
+hipages.prototype.tellWithCard = function (response) {
+    response.tellWithCard(this.vars.speechOutput, this.vars.cardTitle, this.vars.cardContent);
+};
+
+/**
+ * Function to response via Alexa and continue the session
+ *
+ * @param response
+ */
+hipages.prototype.ask = function (response) {
+    response.ask(this.vars.speechOutput, this.vars.repromptSpeech);
+};
+
+/**
+ * Function to response via Alexa with cards and continue the session
+ *
+ * @param response
+ */
+hipages.prototype.askWithCard = function (response) {
+    response.askWithCard(this.vars.speechOutput, this.vars.cardTitle, this.vars.cardContent, this.vars.repromptSpeech);
+};
+
+/**
+ * Stores an intent in the session
+ *
+ * @param session obj
+ * @param intent string
+ */
 hipages.prototype.storeIntentInSession = function (session, intent) {
     session.attributes.intents = session.attributes.intents || [];
     session.attributes.intents.push(intent);
+    console.log('storeIntentInSession');
     console.log(session.attributes.intents);
 };
 
+/**
+ * Gets the last intent from the session
+ *
+ * @param session obj
+ * @param pos integer
+ */
 hipages.prototype.getLastIntentInSession = function (session, pos) {
     pos = pos || -1;
+    var lastIntent = '';
+    if (!Array.isArray(session.attributes.intents)) {
+        lastIntent = session.attributes.intents.slice(pos)[0];
+    }
     console.log('getLastIntentInSession');
-    var lastIntent = session.attributes.intents.slice(pos)[0];
     console.log(lastIntent);
     return lastIntent;
 };
 
+/**
+ * Stores a value in the session as
+ *      dataInfo { source : [ { key : value} ,  { key : value} , ...] }
+ * @param session obj
+ * @param source string
+ * @param key string
+ * @param value obj
+ */
 hipages.prototype.storeDataInSession = function (session, source, key, value) {
     session.attributes.dataInfo = session.attributes.dataInfo || {};
     if (!Array.isArray(session.attributes.dataInfo[source])) {
@@ -93,8 +174,17 @@ hipages.prototype.storeDataInSession = function (session, source, key, value) {
     var keyValue = {};
     keyValue[key] = value;
     session.attributes.dataInfo[source].push(keyValue);
+    console.log('storeDataInSession');
 };
 
+/**
+ * Get the value stored in the session
+ *
+ * @param session obj
+ * @param source string
+ * @param key string
+ * @returns {string}
+ */
 hipages.prototype.getDataInSession = function (session, source, key) {
     var data = '';
     if (Array.isArray(session.attributes.dataInfo[source])) {
@@ -104,79 +194,147 @@ hipages.prototype.getDataInSession = function (session, source, key) {
             }
         }
     }
+    console.log('getDataInSession');
+    console.log('data');
     return data;
 };
 
-hipages.prototype.intentHandlers = Object.assign({
-    "AMAZON.YesIntent": function (intent, session, response) {
-        switch (this.getLastIntentInSession(session)) {
-            case 'planDay_getSummary':
-                var speechOutput = "Would you like me to give you your leads, read your messages or send reminders for the outstanding payments?";
-                var cardTitle = "Please be more specific";
-                var cardContent = speechOutput;
-                response.askWithCard(speechOutput, cardTitle, cardContent);
-                break;
-            case 'jobComplete_markComplete':
-                var speechOutput = "How much for?";
-                var cardTitle = "How much?";
-                var cardContent = "I need to know how much for your payment request";
-                response.askWithCard(speechOutput, cardTitle, cardContent);
-                break;
-            default:
-                var speechOutput = "How I can help?";
-                var cardTitle = "Hello!";
-                var cardContent = speechOutput;
-                response.askWithCard(speechOutput, cardTitle, cardContent);
-        }
-        this.storeIntentInSession(session, 'AMAZON.YesIntent');
-    },
-    "AMAZON.NoIntent": function (intent, session, response) {
-    switch (this.getLastIntentInSession(session)) {
-        case 'accountBalance_daysCredit' :
-            var speechOutput = "Ok";
-            response.tell(speechOutput);
-            break;
-        case 'planDay_getSummary' :
-            var speechOutput = "Ok. Let me know when you're ready";
-            response.tell(speechOutput);
-            break;
-        default :
-            var speechOutput = "Not sure what you're referring to";
-            var cardTitle = "I'm lost";
-            var cardContent = "Can you be more specific?";
-            response.askWithCard(speechOutput, cardTitle, cardContent);
-            break;
+/**
+ * Stores the intent waiting for response in the session
+ *
+ * @param session obj
+ * @param intent string
+ */
+hipages.prototype.storeIntentsWaitingResponseInSession = function (session, intent) {
+    session.attributes.intentsWaitingResponse = intent;
+    console.log('storeIntentsWaitingResponseInSession');
+    console.log(session.attributes.intentsWaitingResponse);
+};
+
+/**
+ * Gets the intent waiting for response in the session
+ *
+ * @param session obj
+ * @returns {string}
+ */
+hipages.prototype.getIntentsWaitingResponseInSession = function (session) {
+    var lastIntent = '';
+    if (session.attributes.intentsWaitingResponse) {
+        lastIntent = session.attributes.intentsWaitingResponse;
     }
-    this.storeIntentInSession(session, 'AMAZON.NoIntent');
-    },
-    "AMAZON.HelpIntent": function (intent, session, response) {
-        this.storeIntentInSession(session, 'AMAZON.HelpIntent');
-        var speechOutput = "I can help you with getting an update on hi pages, checking your account balance, completing jobs and advice on how to improve.";
-        var cardTitle = "How I can help?";
-        var cardContent = speechOutput;
-        response.askWithCard(speechOutput, cardTitle, cardContent);
-    },
-    "AMAZON.CancelIntent": function (intent, session, response) {
-        this.storeIntentInSession(session, 'AMAZON.CancelIntent');
-        var speechOutput = "Have a nice day. Let's get a beer together one time";
-        var cardTitle = "Got it!";
-        var cardContent = "Have a nice day. Let's get a beer together one time!";
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
-    },
-    "AMAZON.StopIntent": function (intent, session, response) {
-        this.storeIntentInSession(session, 'AMAZON.StopIntent');
-        var speechOutput = "Calm down";
-        var cardTitle = "Ok bye!";
-        var cardContent = "(Calm down...)";
-        response.tellWithCard(speechOutput, cardTitle, cardContent);
+    console.log('getIntentsWaitingResponseInSession');
+    console.log(lastIntent);
+    return lastIntent;
+};
+
+/**
+ * Removes the intent from the session
+ *
+ * @param session obj
+ */
+hipages.prototype.removeIntentsWaitingResponseInSession = function (session) {
+    session.attributes.intentsWaitingResponse = '';
+    console.log('removeIntentsWaitingResponseInSession');
+    console.log(session.attributes.intentsWaitingResponse);
+};
+
+/**
+ *
+ * Events handlers
+ *
+ */
+
+/**
+ * Overwrite method onSessionStarted
+ *
+ * @param sessionStartedRequest
+ * @param session
+ */
+hipages.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+    console.log("hipages onSessionStarted requestId: " + sessionStartedRequest.requestId
+    + ", sessionId: " + session.sessionId);
+    // any initialization logic goes here
+    initSessionAttributes(session);
+};
+
+
+/**
+ * Overwrite method onLaunch
+ *
+ * @param launchRequest
+ * @param session
+ * @param response
+ */
+hipages.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+    console.log("hipages onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
+    this.vars.speechOutput = "I can give you a summary, any information regarding your leads and advice on getting more leads or how to better convert your leads.";
+    this.vars.repromptText = "Don't be shy! How can I help?";
+    this.ask(response);
+};
+
+/**
+ * Overwrite method onSessionEnded
+ *
+ * @param sessionEndedRequest
+ * @param session
+ */
+hipages.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+    console.log("hipages onSessionEnded requestId: " + sessionEndedRequest.requestId
+    + ", sessionId: " + session.sessionId);
+    // any cleanup logic goes here
+    resetSessionAttributes(session);
+    resetVars();
+};
+
+/**
+ * Overwrite method onIntent
+ * Called when the user specifies an intent.
+ *
+ * @param intentRequest
+ * @param session
+ * @param response
+ */
+hipages.prototype.eventHandlers.onIntent = function (intentRequest, session, response) {
+    var intent = intentRequest.intent,
+        intentName = intentRequest.intent.name,
+        intentHandler = this.intentHandlers[intentName];
+    if (intentHandler) {
+        console.log('dispatch intent = ' + intentName);
+        this.vars.currentIntent = intentName;
+        this.vars.lastIntent = this.getLastIntentInSession(session);
+        this.vars.waitingIntent = this.getIntentsWaitingResponseInSession(session);
+        this.vars.speechOutput = '';
+        this.vars.cardTitle = '';
+        this.vars.cardContent = '';
+        this.vars.repromptSpeech = '';
+        this.storeIntentInSession(session, intentName);
+        intentHandler.call(this, intent, session, response);
+    } else {
+        throw 'Unsupported intent = ' + intentName;
     }
-}, generic.intentHandlers, planDay.intentHandlers,  accountBalance.intentHandlers, jobComplete.intentHandlers, howToBeAwesome.intentHandlers, jokes.intentHandlers, message.intentHandlers);
+};
+
+
+/**
+ * Register new intend handlers
+ *
+ * @param reqisterIntentHandler
+ */
+hipages.prototype.registerIntendHandler = function (reqisterIntentHandler) {
+    this.intentHandlers = Object.assign(this.intentHandlers, reqisterIntentHandler);
+};
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function index (event, context) {
     // Create an instance of the hipages skill.
     var hipagesSkill = new hipages();
+    hipagesSkill.registerIntendHandler(generic);
+    hipagesSkill.registerIntendHandler(planDay);
+    hipagesSkill.registerIntendHandler(accountBalance);
+    hipagesSkill.registerIntendHandler(jobComplete);
+    hipagesSkill.registerIntendHandler(howToBeAwesome);
+    hipagesSkill.registerIntendHandler(jokes);
+    hipagesSkill.registerIntendHandler(message);
     hipagesSkill.execute(event, context);
 };
-
 // You can add more handlers here, and reference them in serverless.yaml
