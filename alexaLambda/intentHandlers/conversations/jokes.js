@@ -1,9 +1,6 @@
-
 'use strict';
 
-function Jokes() {}
-
-Jokes.prototype.intentHandlers = {
+module.exports = {
     // register custom intent handlers
     "jokes_solveTyreKickers": function (intent, session, response) {
         var possibleSpeechAnswers = [
@@ -21,5 +18,3 @@ Jokes.prototype.intentHandlers = {
         this.askWithCard(response);
     }
 };
-
-module.exports = new Jokes();

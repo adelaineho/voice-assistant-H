@@ -1,8 +1,24 @@
 'use strict';
-
-function Generic() {}
-
-Generic.prototype.intentHandlers = {
+/**
+ * All the generic intents look for the waitingIntent an try to call the homologous in that intent
+ * or the waitingIntent to handler the response.
+ * e.g if waitingIntent is 'myIntent'
+ *      AMAZON.YesIntent will try to call  myIntentYes
+ *      AMAZON.NoIntent  will try to call myIntentNo
+ *      AMAZON.HelpIntent  will try to call myIntentHelp
+ * All waiting intents should set at least the Yes, No and Help  homologous intents
+ *
+ * @type {{
+ *  generic_greeting: Function,
+ *  generic_getAmount: Function,
+ *  AMAZON.YesIntent: Function,
+ *  AMAZON.NoIntent: Function,
+ *  AMAZON.HelpIntent: Function,
+ *  AMAZON.CancelIntent: Function,
+ *  AMAZON.StopIntent: Function
+ *  }}
+ */
+module.exports = {
     // register custom intent handlers
     "generic_greeting": function (intent, session, response) {
         //get text back and say same greeting
@@ -94,5 +110,3 @@ Generic.prototype.intentHandlers = {
         }
     }
 };
-
-module.exports = new Generic();

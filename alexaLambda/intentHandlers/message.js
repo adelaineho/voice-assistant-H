@@ -2,9 +2,7 @@
 
 var jobCompleteService = require('../services/jobComplete');
 
-function Message() {}
-
-Message.prototype.intentHandlers = {
+module.exports = {
 
     "getMessageType": function (intent) {
         var messageText = intent.slots.messageText.value;
@@ -70,5 +68,3 @@ Message.prototype.intentHandlers = {
         }
     }
 };
-
-module.exports = new Message();

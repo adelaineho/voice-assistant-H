@@ -1,8 +1,6 @@
 'use strict';
 
-function HowToBeAwesome() {}
-
-HowToBeAwesome.prototype.intentHandlers = {
+module.exports = {
     "howToBeAwesome_moreLeads": function (intent, session, response) {
         //get job data
         this.vars.speechOutput = "Your rating on punctuality is 4.2 stars. Your peers are an average of 4.5. Improving this will help you win more work. You can set reminders and get traffic alerts from me to help with that.";
@@ -21,5 +19,3 @@ HowToBeAwesome.prototype.intentHandlers = {
     }
 
 };
-
-module.exports = new HowToBeAwesome();

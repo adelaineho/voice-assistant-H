@@ -9,8 +9,8 @@ function ResponseHttp() {}
 ResponseHttp.prototype.post = function (path, data, callback) {
     console.log('response post wrapper');
     var postData = {
-      url: baseUrl + path,
-      data: data,
+        url: baseUrl + path,
+        form: data,
         headers: [
             {
                 name: 'content-type',

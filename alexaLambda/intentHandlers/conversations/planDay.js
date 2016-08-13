@@ -1,10 +1,8 @@
 'use strict';
 
-var planDayService = require('../services/planDay');
+var planDayService = require('../../services/planDay');
 
-function PlanDay() {}
-
-PlanDay.prototype.intentHandlers = {
+module.exports = {
     /**
      * Get the day's summary data for the connected tradie
      * Puts the intent in the "intentsWaitingResponse" which means it requires a Yes, No and Help intents
@@ -101,5 +99,3 @@ PlanDay.prototype.intentHandlers = {
         }
     }
 };
-
-module.exports = new PlanDay();

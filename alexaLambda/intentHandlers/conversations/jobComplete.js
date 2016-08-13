@@ -1,10 +1,8 @@
 'use strict';
 
-var jobCompleteService = require('../services/jobComplete');
+var jobCompleteService = require('../../services/jobComplete');
 
-function JobComplete() {}
-
-JobComplete.prototype.intentHandlers = {
+module.exports = {
     "jobComplete_markComplete": function (intent, session, response) {
         //get job data
         var username = intent.slots.username.value;
@@ -105,5 +103,3 @@ JobComplete.prototype.intentHandlers = {
     }
 
 };
-
-module.exports = new JobComplete();

@@ -1,8 +1,6 @@
 'use strict';
 
-function AccountBalance() {}
-
-AccountBalance.prototype.intentHandlers = {
+module.exports = {
     "accountBalance_leadCredit": function (intent, session, response) {
         //get summary data
         this.vars.speechOutput = "You have used $20 lead credit this month. You have $50 lead credits remaining";
@@ -43,5 +41,3 @@ AccountBalance.prototype.intentHandlers = {
         this.askWithCard(response);
     }
 };
-
-module.exports = new AccountBalance();
